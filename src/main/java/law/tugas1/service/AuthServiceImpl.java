@@ -37,11 +37,13 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public void updateProfile(Map<String, String> request) {
+    public void updateProfile(Map<String, String> request) throws Exception {
         Optional<User> user = userRepository.findById(request.get("id"));
         if (user.isPresent()) {
             user.get().setNama(request.get("nama"));
             userRepository.save(user.get());
+        } else {
+            throw new Exception();
         }
     }
 

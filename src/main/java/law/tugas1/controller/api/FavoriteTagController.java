@@ -26,7 +26,7 @@ public class FavoriteTagController {
         return ResponseEntity.ok("Favorite Tags Berhasil ditambahkan");
     }
 
-    @PatchMapping(value = "")
+    @PatchMapping(value = "/")
     public ResponseEntity<Object> updateFavoriteTag(@RequestBody Map<String, String> request) {
         favoriteTagService.updateFavoriteTag(request.get("id"), request.get("data"));
         return ResponseEntity.ok("Favorite Tags Berhasil di-update");

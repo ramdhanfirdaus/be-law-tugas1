@@ -6,6 +6,7 @@ import law.tugas1.model.jwt.JwtResponse;
 import law.tugas1.security.JwtTokenUtil;
 import law.tugas1.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -67,9 +68,13 @@ public class AuthController {
     }
 
     @PatchMapping(value = "/update")
-    public ResponseEntity<Object> updateProfile(@RequestBody Map<String, String> request) {
-        authService.updateProfile(request);
-        return ResponseEntity.ok("Update Profile Berhasil");
+    public ResponseEntity<Object> updateProfile(@RequestBody Map<String, String> request) throws Exception {
+        try {
+            authService.updateProfile(request);
+            return ResponseEntity.ok("Update Profile Berhasil");
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
 }
